@@ -10,6 +10,10 @@ security:
                 property: email
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         login:
             pattern: ^/api/login_check
             stateless: true
@@ -24,6 +28,13 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
+
+        main:
+            lazy: true
+            provider: app_user_provider
+            form_login:
+                login_path: login
+                check_path: login
 
     access_control:
         #- { path: ^/api/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
